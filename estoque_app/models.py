@@ -1,4 +1,6 @@
 from django.db import models
+from django.core.exceptions import ObjectDoesNotExist
+
 
 """
 class User {
@@ -14,6 +16,7 @@ class User(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
     email = models.EmailField(max_length=100)
+    password = models.CharField(max_length=100)
     role = models.CharField(max_length=100)
 
     def login(self, email: str, password: str) -> bool:
@@ -21,6 +24,17 @@ class User(models.Model):
 
     def logout(self) -> None:
         pass
+
+    def getUser(userId):
+        try:
+            user = User.objects.get(id=userId)
+            return user
+        except ObjectDoesNotExist:
+            return False
+        
+    def updateUser(self):
+        self.save()
+
 
 """
 class Product {
@@ -44,7 +58,7 @@ class Product(models.Model):
         pass
 
     def adjustStock(self, quantity: int) -> bool:
-        pass
+        self.stockQuantity += quantity
 
 """class Order {
     - orderId: int
@@ -80,7 +94,11 @@ class Seller {
 }
 """
 class Seller(User):
-    sales = models.ManyToManyField('Order')
+    role = 'seller'
+    sales = models.ManyToManyField(Order, related_name='selled_by')
+
+    def createSeller(self) -> bool:
+        self.save()
 
     def registerProduct(self, product: Product) -> bool:
         pass
@@ -101,13 +119,11 @@ class Manager {
 }
 """
 class Manager(User):
+    role = 'manager'
     workers = models.ManyToManyField(User, related_name='managed_by')
 
-    def addUser(self, user: User) -> bool:
-        pass
-
-    def removeUser(self, userId: int) -> bool:
-        pass
+    def createManager(self) -> bool:
+        self.save()
 
     def viewFinancialReport(self) -> str:
         pass
