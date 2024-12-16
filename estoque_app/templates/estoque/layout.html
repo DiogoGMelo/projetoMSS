@@ -9,8 +9,13 @@
 
 <body>
 <div class="navbar">
-    <a href="{% url 'home' %}" class="navbar-brand">Home</a>
-    <a href="{% url 'createUser' %}" class="navbar-item">Create User</a>
+    <a href="{% url 'home' %}" class="nav-buttons">Home</a>
+    <a href="{% url 'showUsers' %}" class="nav-buttons">Perfis</a>
+    <a href="{% url 'createUser' %}" class="nav-buttons">Criar perfil</a>
+    <button class="nav-buttons">Marketplaces</button>
+    <button class="nav-buttons">Relatórios</button>
+    <button class="nav-buttons" id="login-button">Login</button>
+    <button class="nav-buttons" id="signup-button">Cadastro</button>
 </div>
 
 <div class="body-content">

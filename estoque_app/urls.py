@@ -12,11 +12,13 @@ urlpatterns = [
     path("editUser/<int:user_id>/", views.edit_user, name="editUser"),
     
     # Remover usuário (rota dinâmica com ID do usuário)
-    path("deleteUser/<int:user_id>/", views.delete_user, name="deleteUser"),
+    path("deleteUser/", views.delete_user, name="deleteUser"),
 
      path("produtos/", views.produtos, name="produtos"),
 
      path("cadastro/", views.signup, name="cadastro"),
 
      path("login/", views.login, name="login"),
+
+    path("showUsers/", views.show_users, name="showUsers"),
 ]

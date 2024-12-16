@@ -1,0 +1,24 @@
+{% extends "estoque/layout.html" %}
+{% block title %}
+Users interface
+{% endblock %}
+{% block content %}
+<h3>Users interface</h3>
+<br>
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+{% for user in users %}
+<div class="user">
+    <p>ID: {{ user.id }}</p>
+    <p>Name: {{ user.name }}</p>
+    <p>Email: {{ user.email }}</p>
+    <p>Role: {{ user.role }}</p>
+    <form method="POST" action="/deleteUser/">
+        {% csrf_token %}
+        <input type="hidden" name="id" value="{{ user.id }}">
+        <button type="submit" class="btn btn-danger">Delete User</button>
+    </form>
+</div>
+<br>
+{% endfor %}
+{% endblock %}
