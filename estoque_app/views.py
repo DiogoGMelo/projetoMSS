@@ -8,7 +8,7 @@ def home(request):
     Método executado quando o usuário está na interface inicial do sistema.
     Envia-se uma solicitação de renderização da interface home.html.
     """
-    return render(request, "estoque/home.html")
+    return render(request, "estoque/home copy.html")
 
 
 def create_user(request):
@@ -77,3 +77,16 @@ def show_users(request):
     users = User.objects.all()
     return render(request, "estoque/showUsers.html", {"users": users})
 
+
+
+def perfis (request):
+    return render(request, "estoque/perfis.html")
+
+def produtos (request):
+    return render(request, "estoque/produtos.html")
+
+def signup (request):
+    return render(request, "estoque/signup.html")
+
+def login (request):
+    return render(request, "estoque/login.html")
