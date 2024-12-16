@@ -1,0 +1,28 @@
+{% extends "estoque/layout.html" %}
+{% block title %}
+Create user interface
+{% endblock %}
+{% block content %}
+<h3>Create user interface</h3>
+<br>
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form method="POST" class="createUser-form" action="">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <p>Create User:</p>
+    <br>
+    <label>Username:</label> <input type="text" id="name" name="name"> <br><br>
+    <label>Email:</label> <input type="e-mail" id="email" name="email"> <br><br>
+    <label>Password:</label> <input type="password" id="password" name="password"> <br><br>
+
+    <label>Role:</label><br>
+    <input type="radio" id="seller" name="role" value="seller">
+    <label for="seller">Seller</label><br>
+    <input type="radio" id="manager" name="role" value="manager">
+    <label for="manager">Manager</label><br><br>
+
+    <br><br>
+    <button type="submit" class="save btn btn-default">Create User</button>
+</form>
+{% endblock %}

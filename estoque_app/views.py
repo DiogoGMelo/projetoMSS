@@ -1,35 +1,68 @@
-from datetime import datetime
-import random, time
-from http import client
-from django.shortcuts import render
-from django.shortcuts import redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from django.utils import timezone
-from estoque_app.models import *
-# Create your views here.
+from estoque_app.models import User, Seller, Manager
+
 
 def home(request):
-    #método executado quando o usuário está na interface inicial do sistema. 
-    #Envia-se uma solicitação de renderização da interface home.html
+    """
+    Método executado quando o usuário está na interface inicial do sistema.
+    Envia-se uma solicitação de renderização da interface home.html.
+    """
     return render(request, "estoque/home.html")
 
-def createUser(request):
+
+def create_user(request):
+    """
+    View para criar usuários (Seller ou Manager).
+    """
     if request.method == "POST":
-        match request.POST['role']:
-            case "seller":
-                user = registerSeller(request)
-            case "manager":
-                user = registerManager(request)
-    else:  
-        return render(request, "estoque/createUser.html")
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        role = request.POST.get('role')
+
+        if not (name and email and password and role):
+            return HttpResponse("Todos os campos são obrigatórios.", status=400)
+
+        if role == "seller":
+            user = Seller(name=name, email=email, password=password)
+            user.save()
+        elif role == "manager":
+            user = Manager(name=name, email=email, password=password)
+            user.save()
+        else:
+            return HttpResponse("Role inválido.", status=400)
+
+        return redirect("home")  # Redireciona para a página inicial após criar o usuário
+
+    return render(request, "estoque/createUser.html")
 
 
-def registerSeller(request):
-    seller = Seller(name = request.POST['name'], email = request.POST['email'], password = request.POST['password'])
-    seller.createSeller()
-    return seller
+def edit_user(request, user_id):
+    """
+    View para editar as informações de um usuário.
+    """
+    user = get_object_or_404(User, id=user_id)
 
-def registerManager(request):
-    manager = Manager(name = request.POST['name'], email = request.POST['email'], password = request.POST['password'])
-    manager.createManager()
-    return manager
+    if request.method == "POST":
+        user.name = request.POST.get('name', user.name)
+        user.email = request.POST.get('email', user.email)
+        if request.POST.get('password'):
+            user.password = request.POST.get('password')
+        user.save()
+        return redirect("home")  # Redireciona para a página inicial após editar o usuário
+
+    return render(request, "estoque/editUser.html", {"user": user})
+
+
+def delete_user(request, user_id):
+    """
+    View para remover um usuário do sistema.
+    """
+    user = get_object_or_404(User, id=user_id)
+
+    if request.method == "POST":
+        user.delete()
+        return redirect("home")  # Redireciona para a página inicial após deletar o usuário
+
+    return render(request, "estoque/deleteUser.html", {"user": user})

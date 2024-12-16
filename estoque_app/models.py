@@ -1,132 +1,84 @@
 from django.db import models
 from django.core.exceptions import ObjectDoesNotExist
+from django.utils.timezone import now
 
 
-"""
-class User {
-    - id: int
-    - name: str
-    - email: str
-    - role: str
-    + login(email: str, password: str): bool
-    + logout(): void
-}
-"""
 class User(models.Model):
-    id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
-    email = models.EmailField(max_length=100)
-    password = models.CharField(max_length=100)
-    role = models.CharField(max_length=100)
+    email = models.EmailField(max_length=100, unique=True)
+    password = models.CharField(max_length=100)  # Evite armazenar senhas diretamente
+    role = models.CharField(max_length=50, choices=[('manager', 'Manager'), ('seller', 'Seller')])
 
-    def login(self, email: str, password: str) -> bool:
-        pass
+    def __str__(self):
+        return self.name
 
-    def logout(self) -> None:
-        pass
-
-    def getUser(userId):
+    @classmethod
+    def get_user(cls, user_id):
         try:
-            user = User.objects.get(id=userId)
-            return user
-        except ObjectDoesNotExist:
-            return False
-        
-    def updateUser(self):
-        self.save()
+            return cls.objects.get(id=user_id)
+        except cls.DoesNotExist:
+            return None
 
 
-"""
-class Product {
-    - productId: int
-    - name: str
-    - price: float
-    - stockQuantity: int
-    - description: str
-    + updateDetails(name: str, price: float, description: str): void
-    + adjustStock(quantity: int): bool
-}
-"""
 class Product(models.Model):
-    productId = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
-    price = models.FloatField()
-    stockQuantity = models.IntegerField()
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    stock_quantity = models.IntegerField()
     description = models.TextField()
 
-    def updateDetails(self, name: str, price: float, description: str) -> None:
-        pass
+    def update_details(self, name: str, price: float, description: str):
+        self.name = name
+        self.price = price
+        self.description = description
+        self.save()
 
-    def adjustStock(self, quantity: int) -> bool:
-        self.stockQuantity += quantity
+    def adjust_stock(self, quantity: int):
+        if self.stock_quantity + quantity < 0:
+            raise ValueError("Stock cannot be negative")
+        self.stock_quantity += quantity
+        self.save()
 
-"""class Order {
-    - orderId: int
-    - orderDate: datetime
-    - products: List[Product]
-    - totalPrice: float
-    + calculateTotal(): float
-    + addProduct(product: Product): void
-    + removeProduct(productId: int): void
-}"""
+    def __str__(self):
+        return self.name
+
 
 class Order(models.Model):
-    orderId = models.AutoField(primary_key=True)
-    orderDate = models.DateTimeField()
-    products = models.ManyToManyField('Product')
-    totalPrice = models.FloatField()
+    order_date = models.DateTimeField(default=now)
+    products = models.ManyToManyField(Product, through="OrderProduct")
+    total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0.0)
 
-    def calculateTotal(self) -> float:
-        pass
+    def calculate_total(self):
+        self.total_price = sum(item.quantity * item.product.price for item in self.orderproduct_set.all())
+        self.save()
 
-    def addProduct(self, product: Product) -> None:
-        pass
+    def __str__(self):
+        return f"Order {self.id} - Total: {self.total_price}"
 
-    def removeProduct(self, productId: int) -> None:
-        pass
 
-"""
-class Seller {
-    - sales: List[Order]
-    + registerProduct(product: Product): bool
-    + updateStock(productId: int, quantity: int): bool
-    + viewSalesReport(): Report
-}
-"""
+class OrderProduct(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField()
+
+
 class Seller(User):
-    role = 'seller'
-    sales = models.ManyToManyField(Order, related_name='selled_by')
+    class Meta:
+        proxy = True
 
-    def createSeller(self) -> bool:
-        self.save()
+    def register_product(self, product: Product):
+        product.save()
+        return True
 
-    def registerProduct(self, product: Product) -> bool:
-        pass
+    def update_stock(self, product_id: int, quantity: int):
+        product = Product.objects.get(id=product_id)
+        product.adjust_stock(quantity)
+        return True
 
-    def updateStock(self, productId: int, quantity: int) -> bool:
-        pass
 
-    def viewSalesReport(self) -> str:
-        pass
-
-"""
-class Manager {
-    - users: List[User]
-    + addUser(user: User): bool
-    + removeUser(userId: int): bool
-    + viewFinancialReport(): FinancialReport
-    + manageProducts(): void
-}
-"""
 class Manager(User):
-    role = 'manager'
-    workers = models.ManyToManyField(User, related_name='managed_by')
+    class Meta:
+        proxy = True
 
-    def createManager(self) -> bool:
-        self.save()
-
-    def viewFinancialReport(self) -> str:
-        pass
-
-    def manageProducts(self) -> None:
-        pass
+    def view_financial_report(self):
+        # Implementar lógica de relatório financeiro
+        return "Financial report"
