@@ -1,27 +1,107 @@
-.navbar {
-    background-color: lightslategray;
-    font-size: 1em;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+body{
+    margin: 0px;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #e7e7e7;
+}   
+
+.navigation-bar{
+    background-color: #8338EC;
+    display: flex;
+    align-items: center;
+    padding: 14px 20px;
+}
+
+.nav-buttons {
+    float: left;
+    display: block;
     color: white;
-    padding: 8px 5px 8px 5px;
-}
-
-.navbar a {
+    background: #8338EC;
+    border: none;
+    padding: 14px 20px;
     text-decoration: none;
-    color: inherit;
+    font-size: medium;
+    font-weight: 800;
+    border-radius: 12px;
 }
 
-.navbar-brand {
-    font-size: 1.2em;
-    font-weight: 600;
+.nav-buttons:hover {
+    filter: brightness(0.9);
+    cursor: pointer;
 }
 
-.navbar-item {
-    font-variant: small-caps;
-    margin-left: 30px;
+.right{
+    margin-left: auto;
 }
 
-.body-content {
-    padding: 5px;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+#login-button{
+    margin-left: auto;
+    background: #FF006E;
+    border-radius: 12px;
+    margin-right: 9px;
+}
+
+#signup-button{
+    background: #3A86FF;
+    border-radius: 12px;
+}
+
+.login-div{
+    background-color: white;
+    display: flex;
+    width: 450px;
+    height: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;    
+}
+
+.inputs-login{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px; 
+}
+
+.inputs-login p {
+    font-size: larger;
+    font-weight: bold;
+}
+
+.inputs-login button {
+    border: none;
+    margin-top: 20px;
+    background: #FFBE0B;
+    border-radius: 12px;
+    padding: 10px 15px;
+    color: black;
+    font-weight: bold;
+} 
+
+.inputs-login button:hover{
+    filter: brightness(0.9);
+    cursor: pointer;
+}
+
+.inputs-login button:active{
+    filter: brightness(1.2);
+}
+
+.infos-login{
+    background: rgb(237, 237, 237);
+    border-radius: 3px;
+    border: none;
+    margin-top: 10px;
+    width: 250px;
+    height: 20px;
+    padding: 5px 10px;
+}
+
+.infos-login:hover{
+    filter: brightness(0.9);
 }

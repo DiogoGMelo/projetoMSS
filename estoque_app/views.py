@@ -55,14 +55,25 @@ def edit_user(request, user_id):
     return render(request, "estoque/editUser.html", {"user": user})
 
 
-def delete_user(request, user_id):
+def delete_user(request):
     """
     View para remover um usuário do sistema.
     """
-    user = get_object_or_404(User, id=user_id)
 
     if request.method == "POST":
-        user.delete()
+        user = request.POST.get('id')
+        try:
+            u = User.objects.get(id = user)
+            u.delete()
+
+        except User.DoesNotExist:
+            return HttpResponse("Usuário não encontrado", status=404)
+
         return redirect("home")  # Redireciona para a página inicial após deletar o usuário
 
-    return render(request, "estoque/deleteUser.html", {"user": user})
+    return render(request, "estoque/showUsers.html")
+
+def show_users(request):
+    users = User.objects.all()
+    return render(request, "estoque/showUsers.html", {"users": users})
+
