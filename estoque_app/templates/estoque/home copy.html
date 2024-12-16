@@ -3,18 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Estoque</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'estoque/style.css' %}"/>
+    <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
     <div class="navigation-bar">
-        <button class="nav-buttons">Home</button>
-        <button class="nav-buttons">Perfis</button>
-        <button class="nav-buttons">Produtos</button>
+        <a href="{% url 'home' %}"><button class="nav-buttons">Home</button></a>
+        <a href="{% url 'perfis' %}"><button class="nav-buttons">Perfis</button></a>
+        <a href="{% url 'produtos' %}"><button class="nav-buttons">Produtos</button></a>
         <button class="nav-buttons">Marketplaces</button>
         <button class="nav-buttons">Relatórios</button>
-        <button class="nav-buttons" id="login-button">Login</button>
-        <button class="nav-buttons" id="signup-button">Cadastro</button>
+        <a class="right" href="{% url 'login' %}"><button class="nav-buttons" id="login-button">Login</button></a>
+        <a href="{% url 'cadastro' %}"><button class="nav-buttons" id="signup-button">Cadastro</button></a>
     </div>
+
+    <div class="body-content">
+        {% block content %}
+        {% endblock %}
+    </div>
+
 </body>
 </html>
