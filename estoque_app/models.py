@@ -1,6 +1,5 @@
 from django.db import models
 
-# Create your models here.
 """
 class User {
     - id: int
@@ -80,7 +79,7 @@ class Seller {
     + viewSalesReport(): Report
 }
 """
-class Seller(models.Model):
+class Seller(User):
     sales = models.ManyToManyField('Order')
 
     def registerProduct(self, product: Product) -> bool:
@@ -101,8 +100,8 @@ class Manager {
     + manageProducts(): void
 }
 """
-class Manager(models.Model):
-    users = models.ManyToManyField(User)
+class Manager(User):
+    workers = models.ManyToManyField(User, related_name='managed_by')
 
     def addUser(self, user: User) -> bool:
         pass
@@ -115,4 +114,3 @@ class Manager(models.Model):
 
     def manageProducts(self) -> None:
         pass
-
