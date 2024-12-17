@@ -82,3 +82,12 @@ class Manager(User):
     def view_financial_report(self):
         # Implementar lógica de relatório financeiro
         return "Financial report"
+    
+    def register_product(self, product: Product):
+        product.save()
+        return True
+
+    def update_stock(self, product_id: int, quantity: int):
+        product = Product.objects.get(id=product_id)
+        product.adjust_stock(quantity)
+        return True
