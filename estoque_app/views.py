@@ -27,9 +27,11 @@ def create_user(request):
 
         if role == "seller":
             user = Seller(name=name, email=email, password=password)
+            user.role = role
             user.save()
         elif role == "manager":
             user = Manager(name=name, email=email, password=password)
+            user.role = role
             user.save()
         else:
             return HttpResponse("Role inválido.", status=400)
