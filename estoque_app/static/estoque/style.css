@@ -136,9 +136,9 @@ a {
 }
 
 .user{
-    display: flex;
-    flex-direction: column;
+    display: block;
     align-items: center;
+    align-content: center;
     background: white;
     justify-content: center;
     width: 300px;
@@ -148,6 +148,18 @@ a {
     padding: 12px;
     border-radius: 12px;
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.info-div {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.buttons-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 
 .create-user {

@@ -12,20 +12,26 @@ Perfis
 
 {% for user in users %}
 <div class="user">
-    <p>ID: {{ user.id }}</p>
-    <p>Name: {{ user.name }}</p>
-    <p>Email: {{ user.email }}</p>
-    <p>Role: {{ user.role }}</p>
-    <form method="POST" action="/deleteUser/">
-        {% csrf_token %}
-        <input type="hidden" name="id" value="{{ user.id }}">
-        <button type="submit" class="btn btn-danger edit-button">Delete User</button>
-    </form>
-    <form method="GET" action="/editUser/{{ user.id }}">
-        {% csrf_token %}
-        <input type="hidden" name="id" value="{{ user.id }}">
-        <a href=""><button type="submit" class="btn btn-danger edit-button">Edit User</button></a>
-    </form>
+    <div class="info-div">
+        <p>ID: {{ user.id }}</p>
+        <p>Name: {{ user.name }}</p>
+        <p>Email: {{ user.email }}</p>
+        <p>Role: {{ user.role }}</p>
+    </div>
+
+    <div class="buttons-div">
+        <form method="POST" action="/deleteUser/">
+            {% csrf_token %}
+            <input type="hidden" name="id" value="{{ user.id }}">
+            <button type="submit" class="btn btn-danger edit-button">Delete User</button>
+        </form>
+        <form method="GET" action="/editUser/{{ user.id }}">
+            {% csrf_token %}
+            <input type="hidden" name="id" value="{{ user.id }}">
+            <a href=""><button type="submit" class="btn btn-danger edit-button">Edit User</button></a>
+        </form>
+    </div>
+
 </div>
 <br>
 {% endfor %}
