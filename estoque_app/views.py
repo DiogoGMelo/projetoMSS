@@ -97,23 +97,22 @@ def registerProduct (request):
     if request.method == "POST":        
         product = Product(name=request.POST['name'], price=request.POST['price'], stock_quantity=request.POST['stock_quantity'], description=request.POST['description'])
         product.save()
-        return redirect("home")
+        return redirect("produtos")
 
     return render(request, "estoque/registerProduct.html")
 
 def deleteProduct(request):
 
     if request.method == "POST":
-        product_name = request.POST.get('product_name')
+        product_id = request.POST.get('product_id')
         
         try:
-            product = Product.objects.get(name = product_name)
+            product = Product.objects.get(id = product_id)
             product.delete()
 
         except Product.DoesNotExist:
             return HttpResponse(f"Produto {product.name} não encontrado", status=404)
-    
-    return render(request, "estoque/produtos.html")
+    return redirect(produtos)
 
 def marketplaces (request):
     return render(request, "estoque/marketplaces.html")
