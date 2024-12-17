@@ -3,6 +3,8 @@
 Produtos
 {% endblock %}
 {% block content %}
-<a href="{% url 'registerProduct' %}" class="nav-buttons">Cadastrar Produtos</a>
-<a href="{% url 'stock' %}" class="nav-buttons">Ver Estoque</a>
+<div class="edit-users">
+    <a href="{% url 'registerProduct' %}"><button class="edit-button">Cadastrar Produtos</button></a>
+    <a href="{% url 'stock' %}"><button class="edit-button">Ver Estoque</button></a>
+</div>
 {% endblock %}
