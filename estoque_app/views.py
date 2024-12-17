@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from estoque_app.models import User, Seller, Manager
+from estoque_app.models import User, Seller, Manager, Product
 
 
 def home(request):
@@ -77,11 +77,26 @@ def perfis (request):
     users = User.objects.all()
     return render(request, "estoque/perfis.html", {"users": users})
 
-def produtos (request):
-    return render(request, "estoque/produtos.html")
-
 def signup (request):
     return render(request, "estoque/signup.html")
 
 def login (request):
     return render(request, "estoque/login.html")
+
+def produtos (request):
+    return render(request, "estoque/produtos.html")
+
+def registerProduct (request):
+    # verifica se a solicitação (request) usa o metodo POST de envio de dados
+    if request.method == "POST":        
+        product = Product(name=request.POST['name'], price=request.POST['price'], stock_quantity=request.POST['stock_quantity'], description=request.POST['description'])
+        product.save()
+        return redirect("home")
+
+    return render(request, "estoque/registerProduct.html")
+
+
+
+def stock (request):
+    stock = Product.objects.all()
+    return render(request, "estoque/stock.html", {"stock": stock})
