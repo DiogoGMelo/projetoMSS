@@ -2,6 +2,7 @@ body{
     margin: 0px;
     font-family: Poppins;
     background-color: #e7e7e7;
+    margin-bottom: 10px;
 }   
 
 .navigation-bar{
@@ -157,4 +158,32 @@ body{
 
 h3 {
     text-align: center;
+}
+
+.market-div {
+    display: flex;
+    width: 450px;
+    height: 450px;
+    background: white;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    margin-top: 25px;
+    border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.market-div:hover{
+    cursor: pointer;
+}
+
+.market-div img {
+    width: 200px;
+    height: 200px;
+}
+
+.market-div p {
+    margin-left: 25px;
+    font-weight: bold;
+    font-size: large;
 }

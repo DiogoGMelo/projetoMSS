@@ -113,3 +113,6 @@ def deleteProduct(request):
             return HttpResponse(f"Produto {product.name} não encontrado", status=404)
     
     return render(request, "estoque/deleteProduct.html", {"stock": stock})
+
+def marketplaces (request):
+    return render(request, "estoque/marketplaces.html")
