@@ -5,7 +5,7 @@ urlpatterns = [
     # Página inicial
     path("", views.home, name="home"),
     
-    # Criar usuário
+    # Gerenciar usuários
     path("perfis/", views.perfis, name="perfis"),
     
     # Editar usuário (rota dinâmica com ID do usuário)
@@ -14,11 +14,16 @@ urlpatterns = [
     # Remover usuário (rota dinâmica com ID do usuário)
     path("deleteUser/", views.delete_user, name="deleteUser"),
 
+    # Criar usuário
+    path("createUser/", views.create_user, name="createUser"),
+
+     # Página produtos
      path("produtos/", views.produtos, name="produtos"),
 
+    # Página para cadastrar usuário na plataforma
      path("cadastro/", views.signup, name="cadastro"),
 
+    # Página para logar usuário na plataforma
      path("login/", views.login, name="login"),
 
-    path("showUsers/", views.show_users, name="showUsers"),
 ]

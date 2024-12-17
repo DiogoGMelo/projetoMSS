@@ -1,6 +1,6 @@
 body{
     margin: 0px;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Poppins;
     background-color: #e7e7e7;
 }   
 
@@ -9,6 +9,7 @@ body{
     display: flex;
     align-items: center;
     padding: 14px 20px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 .nav-buttons {
@@ -104,4 +105,56 @@ body{
 
 .infos-login:hover{
     filter: brightness(0.9);
+}
+
+.edit-users{
+    display: flex;
+    justify-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.edit-button{
+    background: #FB5607;
+    border: none;
+    padding: 10px;
+    margin-left: 10px;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+}
+
+.edit-button:hover{
+    cursor: pointer;
+    filter: brightness(0.9);
+}
+
+.user{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: white;
+    justify-content: center;
+    width: 300px;
+    height: auto;
+    margin: auto;
+    margin-top: 10px;
+    padding: 12px;
+    border-radius: 12px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.create-user{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.create-user input:hover{
+    cursor: pointer;
+}
+
+h3 {
+    text-align: center;
 }

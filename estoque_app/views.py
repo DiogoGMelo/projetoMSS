@@ -71,16 +71,11 @@ def delete_user(request):
 
         return redirect("home")  # Redireciona para a página inicial após deletar o usuário
 
-    return render(request, "estoque/showUsers.html")
-
-def show_users(request):
-    users = User.objects.all()
-    return render(request, "estoque/showUsers.html", {"users": users})
-
-
+    return render(request, "estoque/perfis.html")
 
 def perfis (request):
-    return render(request, "estoque/perfis.html")
+    users = User.objects.all()
+    return render(request, "estoque/perfis.html", {"users": users})
 
 def produtos (request):
     return render(request, "estoque/produtos.html")

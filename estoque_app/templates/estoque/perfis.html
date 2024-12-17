@@ -4,4 +4,25 @@ Perfis
 {% endblock %}
 {% block content %}
 
+<div class="edit-users">
+    <a href="{% url 'createUser' %}"><button class="edit-button">Criar Usuário</button></a>
+</div>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+{% for user in users %}
+<div class="user">
+    <p>ID: {{ user.id }}</p>
+    <p>Name: {{ user.name }}</p>
+    <p>Email: {{ user.email }}</p>
+    <p>Role: {{ user.role }}</p>
+    <form method="POST" action="/deleteUser/">
+        {% csrf_token %}
+        <input type="hidden" name="id" value="{{ user.id }}">
+        <button type="submit" class="btn btn-danger edit-button">Delete User</button>
+        <a href=""><button type="submit" class="btn btn-danger edit-button">Edit User</button></a>
+    </form>
+</div>
+<br>
+{% endfor %}
 {% endblock %}
