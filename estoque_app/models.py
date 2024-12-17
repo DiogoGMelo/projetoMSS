@@ -25,9 +25,6 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     stock_quantity = models.IntegerField()
     description = models.TextField()
-
-    def register_product(self):
-        self.save()
     
     def update_details(self, name: str, price: float, description: str):
         self.name = name

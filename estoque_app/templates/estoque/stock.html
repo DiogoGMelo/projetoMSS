@@ -6,13 +6,13 @@ Estoque
 
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-<p>test</p>
+<P> {{ stock.count }} produto(s) em estoque</P>
 {% for product in stock %}
 <div class="user">
-    <p>produto</p>
     <p>name: {{ product.name }}</p>
-
-<br>
+    <p>price: {{ product.price }}</p>
+    <p>quantity: {{ product.stock_quantity }}</p>
+    <p>description: {{ product.description }}</p>
+</div>
 {% endfor %}
-
 {% endblock %}

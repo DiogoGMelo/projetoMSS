@@ -26,9 +26,12 @@ urlpatterns = [
     # Página para logar usuário na plataforma
      path("login/", views.login, name="login"),
 
-    # Página para cadastrar prodtos
+    # Página para cadastrar produto
     path("registerProduct/", views.registerProduct, name="registerProduct"),
 
     # Página de estoque
     path("stock/", views.stock, name="stock"),
+
+    # Página de deletar produto
+    path("deleteProduct/", views.deleteProduct, name="deleteProduct"),
 ]
