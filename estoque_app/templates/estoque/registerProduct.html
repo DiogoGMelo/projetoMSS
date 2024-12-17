@@ -1,0 +1,21 @@
+{% extends "estoque/home copy.html" %}
+{% block title %}
+Cadastrar Produto
+{% endblock %}
+{% block content %}
+<h3>Cadastrar Produto</h3>
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+<div class="create-user">
+    <form method="POST" class="createUser-form" action="">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <label>Name:</label> <input type="text" id="name" name="name"> <br><br>
+        <label>Price:</label> <input type="number" id="price" name="price"> <br><br>
+        <label>Stock quantity:</label> <input type="number" id="stock_quantity" name="stock_quantity"> <br><br>
+        <label>Description:</label> <input type="text" id="description" name="description"> <br><br>
+    
+        <button type="submit" class="save btn btn-default edit-button">Cadastrar Produto</button>
+    </form>
+</div>
+
+{% endblock %}
