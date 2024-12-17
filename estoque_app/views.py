@@ -1,3 +1,4 @@
+import sys
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from estoque_app.models import User, Seller, Manager, Product
@@ -95,8 +96,20 @@ def registerProduct (request):
 
     return render(request, "estoque/registerProduct.html")
 
-
-
 def stock (request):
     stock = Product.objects.all()
     return render(request, "estoque/stock.html", {"stock": stock})
+
+def deleteProduct(request):
+    stock = Product.objects.all()
+
+    if request.method == "POST":
+        product_name = request.POST.get('product_name')
+        product = get_object_or_404(Product, name=product_name)
+        if product:
+            product.delete()
+            return redirect("home")
+        else:
+            return HttpResponse(f"Produto com ID {product.description} não encontrado", status=404)
+    
+    return render(request, "estoque/deleteProduct.html", {"stock": stock})
