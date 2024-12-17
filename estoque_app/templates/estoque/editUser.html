@@ -1,6 +1,29 @@
 {% extends "estoque/layout.html" %}
 {% block title %}
-Produtos
+Editar usuário
 {% endblock %}
 {% block content %}
+<h3>Editar Usuário</h3>
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+<div class="create-user">
+    <form method="POST" class="createUser-form" action="">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="form-div">
+            <label>Username:</label> <input type="text" id="name" name="name"> <br><br>
+            <label>Email:</label> <input type="e-mail" id="email" name="email"> <br><br>
+            <label>Password:</label> <input type="password" id="password" name="password"> <br><br>
+        
+            <label>Role:</label><br>
+            <input type="radio" id="role" name="role" value="seller">
+            <label for="seller">Seller</label><br>
+            <input type="radio" id="role" name="role" value="manager">
+            <label for="manager">Manager</label>
+            <br><br>
+        </div>
+            <button type="submit" id="create-user-button" class="save btn btn-default edit-button">Edit User</button>
+        
+    </form>
+</div>
+
 {% endblock %}

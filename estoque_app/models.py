@@ -62,6 +62,7 @@ class OrderProduct(models.Model):
 
 
 class Seller(User):
+    role = "seller"
     class Meta:
         proxy = True
 
@@ -76,6 +77,7 @@ class Seller(User):
 
 
 class Manager(User):
+    role = "manager"
     class Meta:
         proxy = True
 
