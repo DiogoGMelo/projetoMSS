@@ -110,6 +110,6 @@ def deleteProduct(request):
             product.delete()
             return redirect("home")
         else:
-            return HttpResponse(f"Produto com ID {product.description} não encontrado", status=404)
+            return HttpResponse(f"Produto {product.name} não encontrado", status=404)
     
     return render(request, "estoque/deleteProduct.html", {"stock": stock})
