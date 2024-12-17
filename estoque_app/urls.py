@@ -29,9 +29,6 @@ urlpatterns = [
     # Página para cadastrar produto
     path("registerProduct/", views.registerProduct, name="registerProduct"),
 
-    # Página de estoque
-    path("stock/", views.stock, name="stock"),
-
     # Página de deletar produto
     path("deleteProduct/", views.deleteProduct, name="deleteProduct"),
 

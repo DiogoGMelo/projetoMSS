@@ -150,19 +150,29 @@ a {
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 }
 
-.create-user{
+.create-user {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: flex-start;
     align-items: center;
-    align-content: center;
+    text-align: center;
 }
 
-.create-user input:hover{
-    cursor: pointer;
+.form-div {
+    text-align: left;
 }
+
 
 h3 {
     text-align: center;
+}
+
+#manager:hover {
+    cursor: pointer;
+}
+
+#seller:hover {
+    cursor: pointer;
 }
 
 .market-div {
