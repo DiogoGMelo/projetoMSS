@@ -46,8 +46,10 @@ def edit_user(request, user_id):
     user = get_object_or_404(User, id=user_id)
 
     if request.method == "POST":
+        user = User.objects.get(id=user_id)
         user.name = request.POST.get('name', user.name)
         user.email = request.POST.get('email', user.email)
+        user.role = request.POST.get('role', user.role)
         if request.POST.get('password'):
             user.password = request.POST.get('password')
         user.save()
