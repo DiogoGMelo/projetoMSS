@@ -10,13 +10,14 @@ Produtos
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 {% for product in stock %}
 <div class="user">
+    <p>id: {{ product.id }}</p>
     <p>name: {{ product.name }}</p>
     <p>price: {{ product.price }}</p>
     <p>quantity: {{ product.stock_quantity }}</p>
     <p>description: {{ product.description }}</p>
     <form method="POST" action="/deleteProduct/">
         {% csrf_token %}
-        <input type="hidden" name="product_name" value="{{ product.name }}">
+        <input type="hidden" name="product_id" value="{{ product.id }}">
         <button type="submit" class="btn btn-danger edit-button">Delete Product</button>
         <a href=""><button type="submit" class="btn btn-danger edit-button">Edit Product</button></a>
     </form>
