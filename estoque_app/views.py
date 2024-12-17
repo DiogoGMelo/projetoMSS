@@ -97,23 +97,19 @@ def registerProduct (request):
 
     return render(request, "estoque/registerProduct.html")
 
-def stock (request):
-    stock = Product.objects.all()
-    return render(request, "estoque/stock.html", {"stock": stock})
-
 def deleteProduct(request):
-    stock = Product.objects.all()
 
     if request.method == "POST":
         product_name = request.POST.get('product_name')
-        product = get_object_or_404(Product, name=product_name)
-        if product:
+        
+        try:
+            product = Product.objects.get(name = product_name)
             product.delete()
-            return redirect("home")
-        else:
+
+        except Product.DoesNotExist:
             return HttpResponse(f"Produto {product.name} não encontrado", status=404)
     
-    return render(request, "estoque/deleteProduct.html", {"stock": stock})
+    return render(request, "estoque/produtos.html")
 
 def marketplaces (request):
     return render(request, "estoque/marketplaces.html")
