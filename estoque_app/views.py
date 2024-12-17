@@ -9,7 +9,7 @@ def home(request):
     Método executado quando o usuário está na interface inicial do sistema.
     Envia-se uma solicitação de renderização da interface home.html.
     """
-    return render(request, "estoque/home copy.html")
+    return render(request, "estoque/home.html")
 
 
 def create_user(request):
@@ -85,7 +85,8 @@ def login (request):
     return render(request, "estoque/login.html")
 
 def produtos (request):
-    return render(request, "estoque/produtos.html")
+    stock = Product.objects.all()
+    return render(request, "estoque/produtos.html", {"stock": stock})
 
 def registerProduct (request):
     # verifica se a solicitação (request) usa o metodo POST de envio de dados

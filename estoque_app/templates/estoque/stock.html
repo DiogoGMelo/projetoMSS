@@ -1,17 +1,9 @@
-{% extends "estoque/home copy.html" %}
+{% extends "estoque/layout.html" %}
 {% block title %}
 Estoque
 {% endblock %}
 {% block content %}
 
 
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-{% for product in stock %}
-<div class="user">
-    <p>name: {{ product.name }}</p>
-    <p>price: {{ product.price }}</p>
-    <p>quantity: {{ product.stock_quantity }}</p>
-    <p>description: {{ product.description }}</p>
-</div>
-{% endfor %}
+
 {% endblock %}

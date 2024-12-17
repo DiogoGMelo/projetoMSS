@@ -1,10 +1,25 @@
-{% extends "estoque/home copy.html" %}
+{% extends "estoque/layout.html" %}
 {% block title %}
 Produtos
 {% endblock %}
 {% block content %}
 <div class="edit-users">
     <a href="{% url 'registerProduct' %}"><button class="edit-button">Cadastrar Produtos</button></a>
-    <a href="{% url 'stock' %}"><button class="edit-button">Ver Estoque</button></a>
 </div>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+{% for product in stock %}
+<div class="user">
+    <p>name: {{ product.name }}</p>
+    <p>price: {{ product.price }}</p>
+    <p>quantity: {{ product.stock_quantity }}</p>
+    <p>description: {{ product.description }}</p>
+    <form method="POST" action="/deleteProduct/">
+        {% csrf_token %}
+        <input type="hidden" name="product_name" value="{{ product.name }}">
+        <button type="submit" class="btn btn-danger edit-button">Delete Product</button>
+        <a href=""><button type="submit" class="btn btn-danger edit-button">Edit Product</button></a>
+    </form>
+</div>
+{% endfor %}
 {% endblock %}
