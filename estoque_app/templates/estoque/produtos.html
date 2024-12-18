@@ -14,11 +14,16 @@ Produtos
     <p>name: {{ product.name }}</p>
     <p>price: {{ product.price }}</p>
     <p>quantity: {{ product.stock_quantity }}</p>
+    <p>marketplace: {{ product.marketplace }}</p>
     <p>description: {{ product.description }}</p>
     <form method="POST" action="/deleteProduct/">
         {% csrf_token %}
         <input type="hidden" name="product_id" value="{{ product.id }}">
         <button type="submit" class="btn btn-danger edit-button">Delete Product</button>
+    </form>
+    <form method="GET" action="/editProduct/{{ product.id }}">
+        {% csrf_token %}
+        <input type="hidden" name="product_id" value="{{ product.id }}">
         <a href=""><button type="submit" class="btn btn-danger edit-button">Edit Product</button></a>
     </form>
 </div>
