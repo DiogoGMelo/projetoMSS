@@ -95,7 +95,8 @@ def produtos (request):
 def registerProduct (request):
     # verifica se a solicitação (request) usa o metodo POST de envio de dados
     if request.method == "POST":        
-        product = Product(name=request.POST['name'], price=request.POST['price'], stock_quantity=request.POST['stock_quantity'], description=request.POST['description'])
+        marketplaces = dict(amazon_quantity = request.POST['amazon_quantity'], ml_quantity = request.POST['ml_quantity'], shopee_quantity = request.POST['shopee_quantity'])
+        product = Product(name=request.POST['name'], price=request.POST['price'], description=request.POST['description'], marketplace=marketplaces)
         product.save()
         return redirect("produtos")
 
@@ -113,6 +114,24 @@ def deleteProduct(request):
         except Product.DoesNotExist:
             return HttpResponse(f"Produto {product.name} não encontrado", status=404)
     return redirect(produtos)
+
+def edit_product(request, product_id):
+    """
+    View para editar as informações de um produtp.
+    """
+    product = get_object_or_404(Product, id=product_id)
+
+    if request.method == "POST":
+        product = Product.objects.get(id=product_id)
+        marketplaces = dict(amazon_quantity = request.POST['amazon_quantity'], ml_quantity = request.POST['ml_quantity'], shopee_quantity = request.POST['shopee_quantity'])
+        product.name=request.POST['name']
+        product.price=request.POST['price']
+        product.description=request.POST['description']
+        product.marketplace=marketplaces
+        product.save()
+        return redirect(produtos)  # Redireciona para a página inicial após editar o usuário
+
+    return render(request, "estoque/editProduct.html", {"product": product})
 
 def marketplaces (request):
     return render(request, "estoque/marketplaces.html")

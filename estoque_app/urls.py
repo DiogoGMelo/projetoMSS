@@ -32,6 +32,9 @@ urlpatterns = [
     # Página de deletar produto
     path("deleteProduct/", views.deleteProduct, name="deleteProduct"),
 
+    # Editar usuário (rota dinâmica com ID do usuário)
+    path("editProduct/<int:product_id>/", views.edit_product, name="editProduct"),
+
     # Página de marketplaces
     path("marketplaces/", views.marketplaces, name="marketplaces"),
 ]
