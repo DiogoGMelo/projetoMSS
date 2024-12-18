@@ -5,7 +5,7 @@ Perfis
 {% block content %}
 
 <div class="edit-users">
-    <a href="{% url 'createUser' %}"><button class="edit-button">Criar Usuário</button></a>
+    <a href="{% url 'createUser' %}"><button class="options-button">Criar Usuário</button></a>
 </div>
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
@@ -13,22 +13,22 @@ Perfis
 {% for user in users %}
 <div class="user">
     <div class="info-div">
-        <p>ID: {{ user.id }}</p>
-        <p>Name: {{ user.name }}</p>
+        <p>ID do Usuário: {{ user.id }}</p>
+        <p>Nome: {{ user.name }}</p>
         <p>Email: {{ user.email }}</p>
-        <p>Role: {{ user.role }}</p>
+        <p>Função: {{ user.role }}</p>
     </div>
 
     <div class="buttons-div">
         <form method="POST" action="/deleteUser/">
             {% csrf_token %}
             <input type="hidden" name="id" value="{{ user.id }}">
-            <button type="submit" class="btn btn-danger edit-button">Delete User</button>
+            <button type="submit" class="btn btn-danger options-button">Deletar Usuário</button>
         </form>
         <form method="GET" action="/editUser/{{ user.id }}">
             {% csrf_token %}
             <input type="hidden" name="id" value="{{ user.id }}">
-            <a href=""><button type="submit" class="btn btn-danger edit-button">Edit User</button></a>
+            <a href=""><button type="submit" class="btn btn-danger options-button edit-button">Editar Usuário</button></a>
         </form>
     </div>
 

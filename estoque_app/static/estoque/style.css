@@ -10,12 +10,17 @@ a {
     color: black;
 }
 
+button {
+    font-family: Rubik;
+}
+
 .navigation-bar{
     background-color: #8338EC;
     display: flex;
     align-items: center;
     padding: 14px 20px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    
 }
 
 .nav-buttons {
@@ -29,6 +34,8 @@ a {
     font-size: medium;
     font-weight: 800;
     border-radius: 12px;
+    box-shadow: none;
+    font-family: Poppins;
 }
 
 .nav-buttons:hover {
@@ -95,10 +102,6 @@ a {
     cursor: pointer;
 }
 
-.inputs-login button:active{
-    filter: brightness(1.2);
-}
-
 .infos-login{
     background: rgb(237, 237, 237);
     border-radius: 3px;
@@ -120,19 +123,24 @@ a {
     margin-top: 20px;
 }
 
-.edit-button{
+.options-button{
     background: #FB5607;
+    border-radius: 10px;
     border: none;
     padding: 10px;
     margin-left: 10px;
-    border-radius: 5px;
     color: white;
     font-weight: bold;
 }
 
-.edit-button:hover{
+.options-button:hover{
     cursor: pointer;
     filter: brightness(0.9);
+}
+
+.edit-button {
+    background: #FFBE0B; 
+    color: black;
 }
 
 .user{
@@ -216,6 +224,16 @@ h3 {
 }
 
 h2 {
-    margin-left: 25px;
+    text-align: center;
 }
 
+button:active {
+    filter: brightness(1.2) !important;
+}
+
+.text-field {
+    border-radius: 3px;
+    border: none;
+    padding: 3px 5px;
+    margin-left: 3px;
+}

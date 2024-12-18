@@ -4,28 +4,35 @@ Produtos
 {% endblock %}
 {% block content %}
 <div class="edit-users">
-    <a href="{% url 'registerProduct' %}"><button class="edit-button">Cadastrar Produtos</button></a>
+    <a href="{% url 'registerProduct' %}"><button class="options-button">Cadastrar Produtos</button></a>
 </div>
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 {% for product in stock %}
 <div class="user">
-    <p>id: {{ product.id }}</p>
-    <p>name: {{ product.name }}</p>
-    <p>price: {{ product.price }}</p>
-    <p>quantity: {{ product.stock_quantity }}</p>
-    <p>marketplace: {{ product.marketplace }}</p>
-    <p>description: {{ product.description }}</p>
-    <form method="POST" action="/deleteProduct/">
-        {% csrf_token %}
-        <input type="hidden" name="product_id" value="{{ product.id }}">
-        <button type="submit" class="btn btn-danger edit-button">Delete Product</button>
-    </form>
-    <form method="GET" action="/editProduct/{{ product.id }}">
-        {% csrf_token %}
-        <input type="hidden" name="product_id" value="{{ product.id }}">
-        <a href=""><button type="submit" class="btn btn-danger edit-button">Edit Product</button></a>
-    </form>
+    <div class="info-div">
+        <p>Id do produto: {{ product.id }}</p>
+        <p>Nome: {{ product.name }}</p>
+        <p>Preço (R$): {{ product.price }}</p>
+        <p>Estoque Amazon: {{ product.marketplace.amazon_quantity }}</p>
+        <p>Estoque Mercado Livre: {{ product.marketplace.ml_quantity }}</p>
+        <p>Estoque Shopee: {{ product.marketplace.shopee_quantity }}</p>
+        <p>Descrição: {{ product.description }}</p>
+    </div>
+
+    <div class="buttons-div">
+        <form method="POST" action="/deleteProduct/">
+            {% csrf_token %}
+            <input type="hidden" name="product_id" value="{{ product.id }}">
+            <button type="submit" class="btn btn-danger options-button">Deletar Produto</button>
+        </form>
+        <form method="GET" action="/editProduct/{{ product.id }}">
+            {% csrf_token %}
+            <input type="hidden" name="product_id" value="{{ product.id }}">
+            <a href=""><button type="submit" class="btn btn-danger options-button edit-button">Editar Produto</button></a>
+        </form>
+    </div>
+
 </div>
 {% endfor %}
 {% endblock %}

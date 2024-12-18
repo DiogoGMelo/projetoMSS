@@ -10,15 +10,15 @@ Cadastrar Produto
         {% csrf_token %}
         {{ form.as_p }}
         <div class="form-div">
-            <label>Name:</label> <input type="text" id="name" name="name"> <br><br>
-            <label>Price:</label> <input type="number" id="price" name="price"> <br><br>
-            <label>Amazon:</label> <input type="number" id="amazon_quantity" name="amazon_quantity"> <br><br>
-            <label>Mercado Livre:</label> <input type="number" id="ml_quantity" name="ml_quantity"> <br><br>
-            <label>Shopee:</label> <input type="number" id="shopee_quantity" name="shopee_quantity"> <br><br>
-            <label>Description:</label> <input type="text" id="description" name="description"> <br><br>
+            <label>Nome:</label> <input class="text-field" type="text" id="name" name="name"> <br><br>
+            <label>Preço (R$):</label> <input class="text-field" type="number" id="price" name="price"> <br><br>
+            <label>Amazon:</label> <input class="text-field" type="number" id="amazon_quantity" name="amazon_quantity"> <br><br>
+            <label>Mercado Livre:</label> <input class="text-field" type="number" id="ml_quantity" name="ml_quantity"> <br><br>
+            <label>Shopee:</label> <input class="text-field" type="number" id="shopee_quantity" name="shopee_quantity"> <br><br>
+            <label>Descrição:</label> <input class="text-field" type="text" id="description" name="description"> <br><br>
         </div>
 
-        <button type="submit" class="save btn btn-default edit-button">Cadastrar Produto</button>
+        <button type="submit" class="save btn btn-default options-button">Cadastrar Produto</button>
     </form>
 </div>
 
