@@ -36,8 +36,8 @@ jobs:
         uses: SonarSource/sonarcloud-github-action@v2
         with:
           args: >
-            -Dsonar.projectKey=153ninja
-            -Dsonar.organization=diogo Gianezi de Melo
+            -Dsonar.projectKey=DiogoGMelo_projetoMSS
+            -Dsonar.organization=153ninja
             -Dsonar.python.coverage.reportPaths=coverage.xml
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
