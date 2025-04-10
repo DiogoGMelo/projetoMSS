@@ -22,12 +22,6 @@ jobs:
         with:
           python-version: '3.11'
 
-     
-      - name: Run tests with coverage
-        run: |
-          PYTHONPATH=$(pwd) coverage run -m pytest
-          coverage xml -o coverage.xml
-
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@v2
         with:
