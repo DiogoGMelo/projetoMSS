@@ -27,9 +27,11 @@ def create_user(request):
 
         if role == "seller":
             user = Seller(name=name, email=email, password=password)
+            user.role = role
             user.save()
         elif role == "manager":
             user = Manager(name=name, email=email, password=password)
+            user.role = role
             user.save()
         else:
             return HttpResponse("Role inválido.", status=400)
@@ -45,14 +47,19 @@ def edit_user(request, user_id):
     """
     user = get_object_or_404(User, id=user_id)
     if request.method == "POST":
+<<<<<<< HEAD
         try:
             user = User.objects.get(id = user_id)
             
         except User.DoesNotExist:
             return HttpResponse("Usuário não encontrado", status=404)
         
+=======
+        user = User.objects.get(id=user_id)
+>>>>>>> master
         user.name = request.POST.get('name', user.name)
         user.email = request.POST.get('email', user.email)
+        user.role = request.POST.get('role', user.role)
         if request.POST.get('password'):
             user.password = request.POST.get('password')
         user.save()
@@ -96,9 +103,10 @@ def produtos (request):
 def registerProduct (request):
     # verifica se a solicitação (request) usa o metodo POST de envio de dados
     if request.method == "POST":        
-        product = Product(name=request.POST['name'], price=request.POST['price'], stock_quantity=request.POST['stock_quantity'], description=request.POST['description'])
+        marketplaces = dict(amazon_quantity = request.POST['amazon_quantity'], ml_quantity = request.POST['ml_quantity'], shopee_quantity = request.POST['shopee_quantity'])
+        product = Product(name=request.POST['name'], price=request.POST['price'], description=request.POST['description'], marketplace=marketplaces)
         product.save()
-        return redirect("home")
+        return redirect("produtos")
 
     return render(request, "estoque/registerProduct.html")
 
@@ -110,15 +118,44 @@ def deleteProduct(request):
     stock = Product.objects.all()
 
     if request.method == "POST":
+<<<<<<< HEAD
         product_name = request.POST.get('product_name')
         product = get_object_or_404(Product, name=product_name)
         if product:
+=======
+        product_id = request.POST.get('product_id')
+        
+        try:
+            product = Product.objects.get(id = product_id)
+>>>>>>> master
             product.delete()
             return redirect("home")
         else:
             return HttpResponse(f"Produto {product.name} não encontrado", status=404)
+<<<<<<< HEAD
     
     return render(request, "estoque/deleteProduct.html", {"stock": stock})
+=======
+    return redirect(produtos)
+
+def edit_product(request, product_id):
+    """
+    View para editar as informações de um produtp.
+    """
+    product = get_object_or_404(Product, id=product_id)
+
+    if request.method == "POST":
+        product = Product.objects.get(id=product_id)
+        marketplaces = dict(amazon_quantity = request.POST['amazon_quantity'], ml_quantity = request.POST['ml_quantity'], shopee_quantity = request.POST['shopee_quantity'])
+        product.name=request.POST['name']
+        product.price=request.POST['price']
+        product.description=request.POST['description']
+        product.marketplace=marketplaces
+        product.save()
+        return redirect(produtos)  # Redireciona para a página inicial após editar o usuário
+
+    return render(request, "estoque/editProduct.html", {"product": product})
+>>>>>>> master
 
 def marketplaces (request):
     return render(request, "estoque/marketplaces.html")

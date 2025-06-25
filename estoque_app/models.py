@@ -23,8 +23,8 @@ class User(models.Model):
 class Product(models.Model):
     name = models.CharField(max_length=100)
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    stock_quantity = models.IntegerField()
     description = models.TextField()
+    marketplace = models.JSONField()
     
     def update_details(self, name: str, price: float, description: str):
         self.name = name

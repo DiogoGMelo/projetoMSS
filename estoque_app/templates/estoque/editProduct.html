@@ -1,9 +1,9 @@
 {% extends "estoque/layout.html" %}
 {% block title %}
-Cadastrar Produto
+Editar Produto
 {% endblock %}
 {% block content %}
-<h3>Cadastrar Produto</h3>
+<h3>Editar Produto</h3>
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 <div class="create-user">
     <form method="POST" class="createUser-form" action="">
@@ -18,7 +18,7 @@ Cadastrar Produto
             <label>Descrição:</label> <input class="text-field" type="text" id="description" name="description"> <br><br>
         </div>
 
-        <button type="submit" class="save btn btn-default options-button">Cadastrar Produto</button>
+        <button type="submit" class="save btn btn-default options-button">Salvar Mudanças</button>
     </form>
 </div>
 
