@@ -46,9 +46,17 @@ def edit_user(request, user_id):
     View para editar as informações de um usuário.
     """
     user = get_object_or_404(User, id=user_id)
-
     if request.method == "POST":
+<<<<<<< HEAD
+        try:
+            user = User.objects.get(id = user_id)
+            
+        except User.DoesNotExist:
+            return HttpResponse("Usuário não encontrado", status=404)
+        
+=======
         user = User.objects.get(id=user_id)
+>>>>>>> master
         user.name = request.POST.get('name', user.name)
         user.email = request.POST.get('email', user.email)
         user.role = request.POST.get('role', user.role)
@@ -102,17 +110,32 @@ def registerProduct (request):
 
     return render(request, "estoque/registerProduct.html")
 
+def stock (request):
+    stock = Product.objects.all()
+    return render(request, "estoque/stock.html", {"stock": stock})
+
 def deleteProduct(request):
+    stock = Product.objects.all()
 
     if request.method == "POST":
+<<<<<<< HEAD
+        product_name = request.POST.get('product_name')
+        product = get_object_or_404(Product, name=product_name)
+        if product:
+=======
         product_id = request.POST.get('product_id')
         
         try:
             product = Product.objects.get(id = product_id)
+>>>>>>> master
             product.delete()
-
-        except Product.DoesNotExist:
+            return redirect("home")
+        else:
             return HttpResponse(f"Produto {product.name} não encontrado", status=404)
+<<<<<<< HEAD
+    
+    return render(request, "estoque/deleteProduct.html", {"stock": stock})
+=======
     return redirect(produtos)
 
 def edit_product(request, product_id):
@@ -132,6 +155,7 @@ def edit_product(request, product_id):
         return redirect(produtos)  # Redireciona para a página inicial após editar o usuário
 
     return render(request, "estoque/editProduct.html", {"product": product})
+>>>>>>> master
 
 def marketplaces (request):
     return render(request, "estoque/marketplaces.html")

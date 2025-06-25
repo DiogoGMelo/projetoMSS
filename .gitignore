@@ -1,0 +1,38 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Caches
+*.log
+*.pot
+*.pyc
+*.pyo
+*.db
+
+*.swp
+
+*.log
+
+# Environment variables
+.env
+.env.*
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+.python-version
+
+# IDEs and editors
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# pyenv
+.python-version
+
+# VSCode settings (optional, if you're using workspace settings)
+.vscode/
