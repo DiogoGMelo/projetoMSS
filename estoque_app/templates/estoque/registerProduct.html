@@ -10,12 +10,12 @@ Cadastrar Produto
         {% csrf_token %}
         {{ form.as_p }}
         <div class="form-div">
-            <label>Nome do produto:</label> <input class="text-field" type="text" id="name" name="name"> <br><br>
-            <label>Preço em reais do Produto (R$):</label> <input class="text-field" type="number" id="price" name="price"> <br><br>
-            <label>Unidades Amazon:</label> <input class="text-field" type="number" id="amazon_quantity" name="amazon_quantity"> <br><br>
-            <label>Unidades Mercado Livre:</label> <input class="text-field" type="number" id="ml_quantity" name="ml_quantity"> <br><br>
-            <label>Unidades Shopee:</label> <input class="text-field" type="number" id="shopee_quantity" name="shopee_quantity"> <br><br>
-            <label>Descrição do produto:</label> <input class="text-field" type="text" id="description" name="description"> <br><br>
+            <label for="name">Nome do produto:</label> <input class="text-field" type="text" id="name" name="name"> <br><br>
+            <label for="price">Preço em reais do Produto (R$):</label> <input class="text-field" type="number" id="price" name="price"> <br><br>
+            <label for="amazon_quantity">Unidades Amazon:</label> <input class="text-field" type="number" id="amazon_quantity" name="amazon_quantity"> <br><br>
+            <label for="ml_quantity">Unidades Mercado Livre:</label> <input class="text-field" type="number" id="ml_quantity" name="ml_quantity"> <br><br>
+            <label for="shopee_quantity">Unidades Shopee:</label> <input class="text-field" type="number" id="shopee_quantity" name="shopee_quantity"> <br><br>
+            <label for="description">Descrição do produto:</label> <input class="text-field" type="text" id="description" name="description"> <br><br>
         </div>
 
         <button type="submit" class="save btn btn-default options-button">Cadastrar Produto</button>
