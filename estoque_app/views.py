@@ -136,10 +136,11 @@ def edit_product(request, product_id):
     if request.method == "POST":
         product = Product.objects.get(id=product_id)
         marketplaces = {
-    'amazon_quantity': request.POST['amazon_quantity'],
-    'ml_quantity': request.POST['ml_quantity'],
-    'shopee_quantity': request.POST['shopee_quantity']
-}
+          'amazon_quantity': request.POST['amazon_quantity'],
+          'ml_quantity': request.POST['ml_quantity'],
+          'shopee_quantity': request.POST['shopee_quantity']
+        }
+
         product.name=request.POST['name']
         product.price=request.POST['price']
         product.description=request.POST['description']
