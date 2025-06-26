@@ -11,16 +11,13 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-import os # Adicione esta linha
-from dotenv import load_dotenv
+import os 
+from decouple import config
+from django.core.management.utils import get_random_secret_key
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-load_dotenv() 
-SECRET_KEY = os.getenv('SECRET_KEY')
-if SECRET_KEY is None:
-    raise Exception("SECRET_KEY não definida! Verifique seu arquivo .env ou variáveis de ambiente.")
 
+SECRET_KEY = config("DJANGO_SECRET_KEY", default=get_random_secret_key())
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
