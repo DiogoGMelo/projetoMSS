@@ -10,11 +10,11 @@ Editar usuário
         {% csrf_token %}
         {{ form.as_p }}
         <div class="form-div">
-            <label>Username:</label> <input type="text" id="name" name="name"> <br><br>
-            <label>Email:</label> <input type="e-mail" id="email" name="email"> <br><br>
-            <label>Password:</label> <input type="password" id="password" name="password"> <br><br>
+            <label for="name">Username:</label> <input type="text" id="name" name="name"> <br><br>
+            <label for="email">Email:</label> <input type="e-mail" id="email" name="email"> <br><br>
+            <label for="password">Password:</label> <input type="password" id="password" name="password"> <br><br>
         
-            <label>Role:</label><br>
+            <label for="role">Role:</label><br>
             <input type="radio" id="role" name="role" value="seller">
             <label for="seller">Seller</label><br>
             <input type="radio" id="role" name="role" value="manager">
@@ -22,11 +22,11 @@ Editar usuário
             <br><br>
         </div>
             <button type="submit" id="create-user-button" class="save btn btn-default edit-button">Edit User</button>
-            <label>Nome:</label> <input class="text-field" type="text" id="name" name="name"> <br><br>
-            <label>Email:</label> <input class="text-field" type="e-mail" id="email" name="email"> <br><br>
-            <label>Senha:</label> <input class="text-field" type="password" id="password" name="password"> <br><br>
+            <label for="name">Nome:</label> <input class="text-field" type="text" id="name" name="name"> <br><br>
+            <label for="email">Email:</label> <input class="text-field" type="e-mail" id="email" name="email"> <br><br>
+            <label for="password>Senha:</label> <input class="text-field" type="password" id="password" name="password"> <br><br>
         
-            <label>Função:</label><br>
+            <label for="role">Função:</label><br>
             <input type="radio" id="seller" name="role" value="seller">
             <label for="seller">Seller</label><br>
             <input type="radio" id="manager" name="role" value="manager">
