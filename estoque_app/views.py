@@ -101,7 +101,12 @@ def produtos (request):
 def register_product (request):
     # verifica se a solicitação (request) usa o metodo POST de envio de dados
     if request.method == "POST":        
-        marketplaces = dict(amazon_quantity = request.POST['amazon_quantity'], ml_quantity = request.POST['ml_quantity'], shopee_quantity = request.POST['shopee_quantity'])
+        # Alterado de dict() para literal de dicionário {}
+        marketplaces = {
+            'amazon_quantity': request.POST['amazon_quantity'],
+            'ml_quantity': request.POST['ml_quantity'],
+            'shopee_quantity': request.POST['shopee_quantity']
+        }
         product = Product(name=request.POST['name'], price=request.POST['price'], description=request.POST['description'], marketplace=marketplaces)
         product.save()
         return redirect("produtos")
@@ -112,7 +117,7 @@ def stock (request):
     stock = Product.objects.all()
     return render(request, "estoque/stock.html", {"stock": stock})
 
-def delete_product (request):
+def delete_product(request):
     if request.method == "POST":
         product_id = request.POST.get('product_id')
         product = get_object_or_404(Product, id=product_id)
@@ -131,7 +136,12 @@ def edit_product(request, product_id):
 
     if request.method == "POST":
         product = Product.objects.get(id=product_id)
-        marketplaces = dict(amazon_quantity = request.POST['amazon_quantity'], ml_quantity = request.POST['ml_quantity'], shopee_quantity = request.POST['shopee_quantity'])
+        # Alterado de dict() para literal de dicionário {}
+        marketplaces = {
+            'amazon_quantity': request.POST['amazon_quantity'],
+            'ml_quantity': request.POST['ml_quantity'],
+            'shopee_quantity': request.POST['shopee_quantity']
+        }
         product.name=request.POST['name']
         product.price=request.POST['price']
         product.description=request.POST['description']
