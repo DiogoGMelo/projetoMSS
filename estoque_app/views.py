@@ -2,8 +2,10 @@ import sys
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from estoque_app.models import User, Seller, Manager, Product
+from django.views.decorators.http import require_GET, require_POST, require_http_methods # Adicione esta linha
 
 
+@require_GET # Esta view apenas exibe a página inicial
 def home(request):
     """
     Método executado quando o usuário está na interface inicial do sistema.
@@ -12,6 +14,7 @@ def home(request):
     return render(request, "estoque/home.html")
 
 
+@require_http_methods(['GET', 'POST']) # Aceita GET para exibir o formulário e POST para enviar
 def create_user(request):
     """
     View para criar usuários (Seller ou Manager).
@@ -41,6 +44,7 @@ def create_user(request):
     return render(request, "estoque/createUser.html")
 
 
+@require_http_methods(['GET', 'POST']) # Aceita GET para exibir o formulário e POST para enviar
 def edit_user(request, user_id):
     """
     View para editar as informações de um usuário.
@@ -66,67 +70,71 @@ def edit_user(request, user_id):
     return render(request, "estoque/editUser.html", {"user": user})
 
 
+@require_POST # Esta view realiza uma ação de deleção, que deve ser via POST
 def delete_user(request):
     """
     View para remover um usuário do sistema.
     """
 
-    if request.method == "POST":
-        user = request.POST.get('id')
-        try:
-            u = User.objects.get(id = user)
-            u.delete()
+    user = request.POST.get('id')
+    try:
+        u = User.objects.get(id = user)
+        u.delete()
 
-        except User.DoesNotExist:
-            return HttpResponse("Usuário não encontrado", status=404)
+    except User.DoesNotExist:
+        return HttpResponse("Usuário não encontrado", status=404)
 
-        return redirect("home")  # Redireciona para a página inicial após deletar o usuário
+    return redirect("home")  # Redireciona para a página inicial após deletar o usuário
 
-    return render(request, "estoque/perfis.html")
 
+@require_GET # Esta view apenas exibe a lista de perfis
 def perfis (request):
     users = User.objects.all()
     return render(request, "estoque/perfis.html", {"users": users})
 
+@require_GET # Esta view apenas exibe a página de cadastro
 def signup (request):
     return render(request, "estoque/signup.html")
 
+@require_GET # Esta view apenas exibe a página de login
 def login (request):
     return render(request, "estoque/login.html")
 
+@require_GET # Esta view apenas exibe a lista de produtos
 def produtos (request):
     stock = Product.objects.all()
     return render(request, "estoque/produtos.html", {"stock": stock})
 
+@require_http_methods(['GET', 'POST']) # Aceita GET para exibir o formulário e POST para enviar
 def register_product (request):
     # verifica se a solicitação (request) usa o metodo POST de envio de dados
-    if request.method == "POST":  
+    if request.method == "POST":        
+        # Alterado de dict() para literal de dicionário {}
         marketplaces = {
-    'amazon_quantity': request.POST['amazon_quantity'],
-    'ml_quantity': request.POST['ml_quantity'],
-    'shopee_quantity': request.POST['shopee_quantity']
-}      
+            'amazon_quantity': request.POST['amazon_quantity'],
+            'ml_quantity': request.POST['ml_quantity'],
+            'shopee_quantity': request.POST['shopee_quantity']
+        }
         product = Product(name=request.POST['name'], price=request.POST['price'], description=request.POST['description'], marketplace=marketplaces)
         product.save()
         return redirect("produtos")
 
     return render(request, "estoque/registerProduct.html")
 
+@require_GET # Esta view apenas exibe o estoque
 def stock (request):
     stock = Product.objects.all()
     return render(request, "estoque/stock.html", {"stock": stock})
 
+@require_POST # Esta view realiza uma ação de deleção, que deve ser via POST
 def delete_product(request):
-    if request.method == "POST":
-        product_id = request.POST.get('product_id')
-        product = get_object_or_404(Product, id=product_id)
-        product.delete()
-        return redirect("home")
-
-    # Se for GET, pode redirecionar ou mostrar uma lista de produtos para deletar (opcional)
+    product_id = request.POST.get('product_id')
+    product = get_object_or_404(Product, id=product_id)
+    product.delete()
     return redirect("home")
 
 
+@require_http_methods(['GET', 'POST']) # Aceita GET para exibir o formulário e POST para enviar
 def edit_product(request, product_id):
     """
     View para editar as informações de um produtp.
@@ -135,12 +143,12 @@ def edit_product(request, product_id):
 
     if request.method == "POST":
         product = Product.objects.get(id=product_id)
+        # Alterado de dict() para literal de dicionário {}
         marketplaces = {
-          'amazon_quantity': request.POST['amazon_quantity'],
-          'ml_quantity': request.POST['ml_quantity'],
-          'shopee_quantity': request.POST['shopee_quantity']
+            'amazon_quantity': request.POST['amazon_quantity'],
+            'ml_quantity': request.POST['ml_quantity'],
+            'shopee_quantity': request.POST['shopee_quantity']
         }
-
         product.name=request.POST['name']
         product.price=request.POST['price']
         product.description=request.POST['description']
@@ -150,5 +158,6 @@ def edit_product(request, product_id):
 
     return render(request, "estoque/editProduct.html", {"product": product})
 
+@require_GET # Esta view apenas exibe a página de marketplaces
 def marketplaces (request):
     return render(request, "estoque/marketplaces.html")
