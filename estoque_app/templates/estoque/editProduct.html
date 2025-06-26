@@ -10,12 +10,12 @@ Editar Produto
         {% csrf_token %}
         {{ form.as_p }}
         <div class="form-div">
-            <label>Novo Nome:</label> <input class="text-field" type="text" id="name" name="name"> <br><br>
-            <label>Novo Preço (R$):</label> <input class="text-field" type="number" id="price" name="price"> <br><br>
-            <label>Atualizar Unidades Amazon:</label> <input class="text-field" type="number" id="amazon_quantity" name="amazon_quantity"> <br><br>
-            <label>Atualizar Unidades Mercado Livre:</label> <input class="text-field" type="number" id="ml_quantity" name="ml_quantity"> <br><br>
-            <label>Atualizar Unidades Shopee:</label> <input class="text-field" type="number" id="shopee_quantity" name="shopee_quantity"> <br><br>
-            <label>Nova Descrição:</label> <input class="text-field" type="text" id="description" name="description"> <br><br>
+            <label for="name">Novo Nome:</label> <input class="text-field" type="text" id="name" name="name"> <br><br>
+            <label for="price">Novo Preço (R$):</label> <input class="text-field" type="number" id="price" name="price"> <br><br>
+            <label for="amazon_quantity">Atualizar Unidades Amazon:</label> <input class="text-field" type="number" id="amazon_quantity" name="amazon_quantity"> <br><br>
+            <label for="ml_quantity">Atualizar Unidades Mercado Livre:</label> <input class="text-field" type="number" id="ml_quantity" name="ml_quantity"> <br><br>
+            <label for="shopee_quantity">Atualizar Unidades Shopee:</label> <input class="text-field" type="number" id="shopee_quantity" name="shopee_quantity"> <br><br>
+            <label for="description">Nova Descrição:</label> <input class="text-field" type="text" id="description" name="description"> <br><br>
         </div>
 
         <button type="submit" class="save btn btn-default options-button">Salvar Mudanças</button>
