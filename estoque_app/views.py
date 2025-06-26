@@ -98,7 +98,7 @@ def produtos (request):
     stock = Product.objects.all()
     return render(request, "estoque/produtos.html", {"stock": stock})
 
-def registerProduct (request):
+def register_Product (request):
     # verifica se a solicitação (request) usa o metodo POST de envio de dados
     if request.method == "POST":        
         marketplaces = dict(amazon_quantity = request.POST['amazon_quantity'], ml_quantity = request.POST['ml_quantity'], shopee_quantity = request.POST['shopee_quantity'])
@@ -112,7 +112,7 @@ def stock (request):
     stock = Product.objects.all()
     return render(request, "estoque/stock.html", {"stock": stock})
 
-def deleteProduct(request):
+def delete_Product (request):
     if request.method == "POST":
         product_id = request.POST.get('product_id')
         product = get_object_or_404(Product, id=product_id)
