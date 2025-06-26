@@ -27,10 +27,10 @@ urlpatterns = [
      path("login/", views.login, name="login"),
 
     # Página para cadastrar produto
-    path("registerProduct/", views.register_Product, name="registerProduct"),
+    path("registerProduct/", views.register_product, name="registerProduct"),
 
     # Página de deletar produto
-    path("deleteProduct/", views.delete_Product, name="deleteProduct"),
+    path("deleteProduct/", views.delete_product, name="deleteProduct"),
 
     # Editar usuário (rota dinâmica com ID do usuário)
     path("editProduct/<int:product_id>/", views.edit_product, name="editProduct"),
