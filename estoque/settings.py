@@ -19,7 +19,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv() 
 SECRET_KEY = os.getenv('SECRET_KEY')
 if SECRET_KEY is None:
-    raise Exception("SECRET_KEY não definida! Verifique seu arquivo .env ou variáveis de ambiente.")
+    raise ValueError("SECRET_KEY não definida! Verifique seu arquivo .env ou variáveis de ambiente.")
 
 
 # Quick-start development settings - unsuitable for production
